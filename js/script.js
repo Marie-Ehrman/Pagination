@@ -6,34 +6,14 @@ FSJS project 2 - List Filter and Pagination
 // Study guide for this project - https://drive.google.com/file/d/1OD1diUsTMdpfMDv677TfL1xO2CEkykSz/view?usp=sharing
 
 
-/*** 
-   Add your global variables that store the DOM elements you will 
-   need to reference and/or manipulate. 
-   
-   But be mindful of which variables should be global and which 
-   should be locally scoped to one of the two main functions you're 
-   going to create. A good general rule of thumb is if the variable 
-   will only be used inside of a function, then it can be locally 
-   scoped to that function.
-***/
+
 const itemsPerPage = 10;
 const list = document.querySelectorAll('li');
 
 
-/*** 
-   Create the `showPage` function to hide all of the items in the 
-   list except for the ten you want to show.
+// create showPage() functions and pass in the list and page variables.
+// Function and its variables created as per the Instructions Page
 
-   Pro Tips: 
-     - Keep in mind that with a list of 54 students, the last page 
-       will only display four.
-     - Remember that the first student has an index of 0.
-     - Remember that a function `parameter` goes in the parens when 
-       you initially define the function, and it acts as a variable 
-       or a placeholder to represent the actual function `argument` 
-       that will be passed into the parens later when you call or 
-       "invoke" the function 
-***/
 const showPage = (list, page) => {
 
    const startIndex = (page * itemsPerPage) - itemsPerPage;
@@ -51,22 +31,22 @@ const showPage = (list, page) => {
 
 }
 
-
-
-/*** 
-   Create the `appendPageLinks function` to generate, append, and add 
-   functionality to the pagination buttons.
-***/
-
+//Pagination function. This will create the pagination div, its ul, and the li
+//children of the ul, as well as create clickable links to sort the pages
 
 function appendPageLinks (list) {
+
+// page variable creates the parameter for the page #'s that should display
+// at the bottom. Round up the result of the list's length divided by desired
+// items displayed per page
    let page = Math.ceil(list.length / itemsPerPage);
-   
+
+//create pagination div and assign class name
    const paginationDiv = document.createElement('div');
    paginationDiv.className = 'pagination';
 
- 
-
+//append pagination div to the bottom of the page by selecting page div and 
+//appending it to the end
    const pageDiv = document.querySelector('.page')
    pageDiv.appendChild(paginationDiv);
 
@@ -74,34 +54,52 @@ function appendPageLinks (list) {
    paginationDiv.appendChild(paginationUL);
 
 
-  
    
-
+//for loop to create li elements to hold anchor tags and links
    for (let i = 0; i < page; i += 1){
 
       let paginationLI = document.createElement('li');
       let paginationA = document.createElement('a');
       paginationA.href = '#';
+      
+//apply active class name to the first 
+            if(i === 0){
+               paginationA.className = 'active';
+               showPage(list, [i + 1]);
+            }
 
+//append the anchor tag to the li element then append li to ul      
       paginationLI.appendChild(paginationA);
       paginationUL.appendChild(paginationLI);
       
+//set the page # of the link
       paginationA.textContent = [i + 1];
       
-      paginationA.addEventListener('click', () => {
+
+//add the click feature that calls showPage() to display only
+//corresponding students to that particular page # using the 
+//list and index variables
+
+      paginationA.addEventListener('click', (event) => {
+         
+         for ( let index = 0; index < page; index += 1){
+            let removeClassA = document.querySelectorAll('a');   
+            removeClassA[index].classList.remove('active');
+            }
+
          showPage(list, [i + 1]);
-   
+         event.target.className = 'active';
+
       });
 
    }
 
 
-   
-   console.log(paginationDiv);
 
+
+   console.log(paginationDiv);
 }
 
+// call appendPageLink() using the list variable 
 
 appendPageLinks(list);
-
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
