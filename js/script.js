@@ -14,23 +14,22 @@ const list = document.getElementsByClassName('student-item');
 
 const showPage = (list, page) => {
 
-//creates the start and end points for the function to calculate
-//and display each page
-   const startIndex = (page * itemsPerPage) - itemsPerPage;
-   const endIndex = (page * itemsPerPage) - 1;
+      //creates the start and end points for the function to calculate
+      //and display each page
+         const startIndex = (page * itemsPerPage) - itemsPerPage;
+         const endIndex = (page * itemsPerPage) - 1;
 
-//step through list
-   for ( let i = 0; i < list.length; i += 1){
-//if the index is between the start and end points show the content else
-//hide the content
-      if(i >= startIndex && i <= endIndex){
-         list[i].style.display = 'block';
-         } 
-      else {
-         list[i].style.display = 'none';
+      //step through list
+         for ( let i = 0; i < list.length; i += 1){
+      //if the index is between the start and end points show the content else
+      //hide the content
+            if(i >= startIndex && i <= endIndex){
+               list[i].style.display = 'block';
+               } 
+            else {
+               list[i].style.display = 'none';
+               }
          }
-   }
-
 }
 
 //Pagination function. This will create the pagination div, its ul, and the li
@@ -45,11 +44,13 @@ function appendPageLinks (list) {
         const page = list.length / itemsPerPage;
 
         //create pagination div and assign class name
+
         const paginationDiv = document.createElement('div');
         paginationDiv.className = 'pagination';
 
         //append pagination div to the bottom of the page by selecting page div and 
         //appending it to the end
+
         const pageDiv = document.querySelector('.page')
         pageDiv.appendChild(paginationDiv);
 
@@ -65,24 +66,26 @@ function appendPageLinks (list) {
             const paginationA = document.createElement('a');
             paginationA.href = '#';
             
-        //apply active class name to the first link and display appropriate
-        //students for active link
+                  //apply active class name to the first link and display appropriate
+                  //students for active link
                     if(i === 0){
                         paginationA.className = 'active';
                         showPage(list, [i + 1]);
                     }
 
-        //append the anchor tag to the li element then append li to ul      
+            //append the anchor tag to the li element then append li to ul
+
             paginationLI.appendChild(paginationA);
             paginationUL.appendChild(paginationLI);
             
-        //set the page # of the link
+            //set the page # of the link
+
             paginationA.textContent = [i + 1];
             
 
-        //add the click feature that calls showPage() to display only
-        //corresponding students to that particular page # using the 
-        //list and index variables
+            //add the click feature that calls showPage() to display only
+            //corresponding students to that particular page # using the 
+            //list and index variables
 
             paginationA.addEventListener('click', (event) => {
                 
@@ -90,7 +93,8 @@ function appendPageLinks (list) {
                     let removeClassA = document.querySelectorAll('a');   
                     removeClassA[index].classList.remove('active');
                     }
-
+               //call showPage() and pass in the list along with the index
+               //to create clickable links
                 showPage(list, [i + 1]);
                 event.target.className = 'active';
 
