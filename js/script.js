@@ -28,8 +28,8 @@ const showPage = (list, page) => {
                } 
             else {
                list[i].style.display = 'none';
-               }
-         }
+             }
+       }
 }
 
 //Pagination function. This will create the pagination div, its ul, and the li
@@ -99,9 +99,7 @@ function appendPageLinks (list) {
                 event.target.className = 'active';
 
             });
-
-        }
-
+       }
 }
 
 // call appendPageLink() using the list variable 
