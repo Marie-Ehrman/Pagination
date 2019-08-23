@@ -8,7 +8,8 @@ FSJS project 2 - List Filter and Pagination
 
 
 const itemsPerPage = 10;
-const list = document.querySelectorAll('li');
+const list = document.getElementsByClassName('student-item cf');
+
 
 
 // create showPage() functions and pass in the list and page variables.
@@ -39,7 +40,8 @@ function appendPageLinks (list) {
 // page variable creates the parameter for the page #'s that should display
 // at the bottom. Round up the result of the list's length divided by desired
 // items displayed per page
-   let page = Math.ceil(list.length / itemsPerPage);
+
+   let page = list.length / itemsPerPage;
 
 //create pagination div and assign class name
    const paginationDiv = document.createElement('div');
@@ -94,10 +96,6 @@ function appendPageLinks (list) {
 
    }
 
-
-
-
-   console.log(paginationDiv);
 }
 
 // call appendPageLink() using the list variable 
