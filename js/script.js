@@ -5,6 +5,7 @@ FSJS project 2 - List Filter and Pagination
    
 
 //declare global variables, should all be ok as constants
+
 const itemsPerPage = 10;
 const list = document.getElementsByClassName('student-item');
 
@@ -16,13 +17,17 @@ const showPage = (list, page) => {
 
       //creates the start and end points for the function to calculate
       //and display each page
+
          const startIndex = (page * itemsPerPage) - itemsPerPage;
          const endIndex = (page * itemsPerPage) - 1;
 
       //step through list
+
          for ( let i = 0; i < list.length; i += 1){
+
       //if the index is between the start and end points show the content else
       //hide the content
+
             if(i >= startIndex && i <= endIndex){
                list[i].style.display = 'block';
                } 
@@ -60,6 +65,7 @@ function appendPageLinks (list) {
 
         
         //for loop to create li elements to hold anchor tags and links
+
         for (let i = 0; i < page; i += 1){
 
             const paginationLI = document.createElement('li');
@@ -68,6 +74,7 @@ function appendPageLinks (list) {
             
                   //apply active class name to the first link and display appropriate
                   //students for active link
+
                     if(i === 0){
                         paginationA.className = 'active';
                         showPage(list, [i + 1]);
@@ -95,6 +102,7 @@ function appendPageLinks (list) {
                     }
                //call showPage() and pass in the list along with the index
                //to create clickable links
+               
                 showPage(list, [i + 1]);
                 event.target.className = 'active';
 
